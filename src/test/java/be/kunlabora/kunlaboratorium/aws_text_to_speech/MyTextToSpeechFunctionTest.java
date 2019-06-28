@@ -9,9 +9,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import static java.nio.charset.Charset.defaultCharset;
 import static org.apache.commons.io.IOUtils.resourceToString;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -22,21 +24,26 @@ public class MyTextToSpeechFunctionTest {
     private PollyFacade pollyFacadeMock;
     @Mock
     private S3Facade s3FacadeMock;
+    @Mock
+    private InputStream audioStreamMock;
 
     @InjectMocks
     private MyTextToSpeechFunction myTextToSpeechFunction;
 
     @Test
-    public void handleRequest_callsPolly() throws IOException {
-        String text = "Hallo dag Heidi";
-        when(s3FacadeMock.read("example-bucket", "test/key.txt")).thenReturn(text);
+    public void handleRequest() throws IOException {
+        String text = "Hallo Kunlaboratorium";
+        when(s3FacadeMock.read("eu-west-3", "example-bucket", "test/key.txt"))
+            .thenReturn(text);
+        when(pollyFacadeMock.toMp3(text)).thenReturn(audioStreamMock);
 
-        myTextToSpeechFunction.handleRequest(createS3Event(), null);
+        String result = myTextToSpeechFunction.handleRequest(loadS3Event(), null);
 
-        verify(pollyFacadeMock).call(text);
+        assertEquals("OK", result);
+        verify(s3FacadeMock).write("eu-west-3", "example-bucket", "speech/key.mp3", audioStreamMock);
     }
 
-    private S3Event createS3Event() throws IOException {
+    private S3Event loadS3Event() throws IOException {
         return new ObjectMapper().readValue(
             resourceToString("/S3-event.json", defaultCharset()),
             S3Event.class

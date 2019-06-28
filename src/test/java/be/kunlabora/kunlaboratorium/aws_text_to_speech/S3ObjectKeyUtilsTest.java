@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class FilenameUtilsTest {
+public class S3ObjectKeyUtilsTest {
 
     @Test
-    public void getMp3Key() {
-        String mp3Key = new FilenameUtils().getMp3Key("text/bla.txt");
+    public void toMp3Key() {
+        String mp3Key = new S3ObjectKeyUtils().toMp3Key("text/bla.txt");
 
         assertEquals("speech/bla.mp3", mp3Key);
     }
