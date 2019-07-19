@@ -1,7 +1,15 @@
 # kunlaboratorium-aws-lambda-text2speech
 
-This repository contains a number of sequential exercises to convert a textfile to an MP3-file using AWS Lambda, AWS S3 and AWS Polly.
- 
+This repository contains a number of sequential exercises that leverage AWS to convert text to speech.
+You will learn about AWS services like S3, Lambda and Polly.
+You will also touch AWS concepts like roles and events.
+
+When you have finished all exercises, you will have built a system that:
+- picks up a textfile in an S3 bucket
+- converts the text to speech
+- saves the speech as an MP3-file on S3
+
+![doc/diagram.png](doc/diagram.png)
 
 ## Exercise 1 - Explore the AWS console
 
