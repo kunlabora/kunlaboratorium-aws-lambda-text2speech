@@ -74,7 +74,7 @@ Why can't one AWS service just call another one?
 We want our Lambda to be triggered automatically whenever we upload a new text file to our bucket
 
 * Upload a new file to your bucket; is your Lambda triggered?
-* In the S3 console, go to your bucket and locate `Events in the properties section
+* In the S3 console, go to your bucket and locate `Events` in the properties section
 * Create a bucket event for .txt files that are created in your bucket
 * See if you can wire the event to your lambda function
 * Now try to upload a new file again...
