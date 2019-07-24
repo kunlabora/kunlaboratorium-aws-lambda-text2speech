@@ -53,7 +53,7 @@ Source: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/what-is-s3.html
 * Create a function from scratch for the Java 8 runtime
 * In the Handler field, fill in `be.kunlabora.kunlaboratorium.aws_text_to_speech.MyTextToSpeechFunction::handleRequest`
 * Upload the zipfile to Lambda and click save
-* Create an test event using the Àmazon S3 put` template
+* Create an test event using the `Amazon S3 put` template
 * In the test event, fill in the aws region, bucket name and object key, according to the text file you created earlier
 * Save the test event and execute your Lambda by clicking `Test`
 * Your Lambda should fail with an `Access denied` error...  
